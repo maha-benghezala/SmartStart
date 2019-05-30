@@ -1,0 +1,191 @@
+{% extends('base.html.twig') %}
+{% block section %}
+    <style>
+
+        .info{
+
+            float: right;
+            margin-left: 40px;
+        }
+        .photo {
+            float: left;
+
+        }
+    </style>
+
+
+<div class="col-lg-9 col-md-9 col-sm-9 ">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+                    {% for f in userr %}
+                    {% for r in f.Roles %}
+                    {% if  r =="ROLE_ENTREPRISE" %}
+
+                    <div class="col-lg-12 col-md-12">
+                        <!-- job box start -->
+                        <div class="job-box-2">
+                            <div class="description">
+
+                                <div class="education mb-50">
+                                    <div class="education-box">
+                                        <!-- Edit profile photo -->
+
+
+                                            <!-- Edit profile photo -->
+                                            <div class="photo" >
+                                                <!-- Edit profile photo -->
+                                                <div class="edit-profile-photo">
+                                                    {{ form_start(form) }}
+                                                    <img src="{{ asset(app.user.image) }}" style="width: 200px; margin-right: 0px ;height: 200px" >
+                                                    <div class="change-photo-btn">
+                                                        <div class="photoUpload">
+                                                            <span><i class="fa fa-upload"></i></span>
+                                                            {{ form_widget(form.image) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                {{ form_widget(form.modifierPhoto) }}
+                                                {{ form_end(form) }}
+                                            </div>
+
+                                        <div class="info">
+                                            <h3 class="heading-2"> {{ f.nomsc }} <a id="user{{ f.id }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></h3>
+                                            <div class="col-sm-10">
+                                                <h6>{{ f.specialite }}</h6>
+                                                <p>{{ f.adresse }}</p>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <h8>{{ f.telephone}}</h8>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <h8>{{ f.email}}</h8>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="hr-boder clearfix">
+                                <!-- about me start -->
+                                <div class="about-me mb-40">
+                                    <h3 class="heading-2">About Me</h3>
+                                    <p>{{ f.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+                </div>
+
+    {% for u in userr %}
+        <div id="dialog2{{ u.id }}" title="Modifier Profil" class="form-control" style="display: none">
+            <div class="submit-address dashboard-list">
+                <form method="GET">
+                    <div class="search-form">
+                        <div class="row pad-20">
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>NomSC</label>
+                                    <input type="text" class="input-text" name="name" id="nomsc{{ u.id }}" placeholder="Your Name">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>specialite</label>
+                                    <input type="text" class="input-text" name="Poste"  id="specialite{{ u.id }}" >
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Adresse</label>
+                                    <input type="text" class="input-text" name="adresse"  id="adresse{{ u.id }}" placeholder="Votre Adresse">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>E-mail</label>
+                                    <input class="input-text" name="email"  id="email{{ u.id }}" placeholder="mail@serveur.com">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="input-text" name="message" id="descriptionn{{ u.id }}" placeholder="Detailed Information"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-btn"><a href="{{ path('profil_entreprise') }}" id="modprofil{{ u.id }}"class="btn btn-md button-theme">Modifier</a></div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
+{% block js %}
+    <script src="{{ asset('https://code.jquery.com/jquery-1.12.4.js') }}"></script>
+    <script src="{{ asset('https://code.jquery.com/ui/1.12.1/jquery-ui.js') }}">
+
+    </script>
+    <link rel="stylesheet" href="{{ asset('https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css') }}">
+    <script>
+
+
+        function popup(page) {
+            window.open(page,'popup','width=1000, height=500, toolbar=false, scrollbars=false');
+        }
+        {% for user in userr %}
+
+        //jquery (bib js)frontend
+        $("#user{{ user.id }}").click(function (e) {
+            $("#dialog2{{ user.id }}").show().dialog({height: "auto",
+                width: 600});
+            $("#nomsc{{ user.id }}").val("{{ user.nomsc }}");
+            $("#email{{ user.id }}").val("{{ user.email }}");
+            $("#specialite{{ user.id }}").val("{{user.specialite }}");
+            $("#adresse{{ user.id }}").val("{{ user.adresse }}");
+            $("#descriptionn{{ user.id }}").val("{{ user.description }}");
+        });
+
+
+        $("#modprofil{{user.id }}").click(function (e) {
+
+
+            var param = {
+
+
+                "nom": $("#nom{{user.id }}").val(),
+
+                "specialite": $("#specialite{{user.id }}").val(),
+                "adresse": $("#adresse{{user.id }}").val(),
+                "email": $("#email{{user.id }}").val(),
+
+                "description": $("#descriptionn{{user.id }}").val()
+            };
+
+            //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+            $.post("{{ path('updateprofil',{'id':user.id}) }}", param, function (data) {
+
+                if (status = "success") {
+                    alert("Success");
+                }
+            });
+
+
+        });
+        {% endfor %}
+    </script>
+{% endblock %}

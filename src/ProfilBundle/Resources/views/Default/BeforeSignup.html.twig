@@ -1,0 +1,57 @@
+{% extends('Basee.html.twig') %}
+{% block section %}
+    <br>
+    <br>
+    <br><br>
+
+
+    <section class="clearfix pageTitle">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="pageTitle">
+                        <h2>Selectionnez le type de compte que vous voulez !</h2><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="services content-area-3">
+    <div class="container">
+    <!-- Main title -->
+    <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+        <div class="service-info">
+            <div class="icon">
+                <i class="flaticon-work"></i>
+            </div>
+            <h5>Freelancer</h5>
+            <p>Compte pour Freelancer</p>
+            <div class="priceBtn">
+                <a href="{{ path('inscription') }}" class="btn btn-primary">Commencer</a>
+            </div>
+        </div>
+    </div>
+        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-5">
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+            <div class="service-info">
+                <div class="icon">
+                    <i class="flaticon-work"></i>
+                </div>
+                <h5>Entreprise</h5>
+                <p>Compte pour Entreprise</p>
+                <div class="priceBtn">
+                    <a href="{{ path('inscription_entreprise') }}" class="btn btn-primary">Commencer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="signUpMessage">
+                <p>Vous avez un compte ? <a href="">Se connecter</a></p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

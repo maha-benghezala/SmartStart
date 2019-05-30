@@ -1,0 +1,26 @@
+{% extends('base.html.twig') %}
+{% block section %}
+
+<div class="col-lg-9 col-md-12 col-sm-12 col-pad">
+    <div class="content-area5 dashboard-content">
+        <div class="submit-address dashboard-list">
+            <div class="photo" >
+                <!-- Edit profile photo -->
+                <div class="edit-profile-photo">
+                    {{ form_start(form) }}
+                    <div class="change-photo-btn">
+                        <div class="photoUpload">
+                            <span><i class="fa fa-upload"></i></span>
+                            {{ form_widget(form.cv) }}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                {{ form_widget(form.save) }}
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

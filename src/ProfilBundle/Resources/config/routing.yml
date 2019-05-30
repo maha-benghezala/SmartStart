@@ -1,0 +1,210 @@
+home:
+    path:     /home
+    defaults: { _controller: ProfilBundle:Default:index }
+inscription:
+    path:     /inscription
+    defaults: { _controller: ProfilBundle:Default:inscription }
+before_signup:
+    path:     /before
+    defaults: { _controller: ProfilBundle:Default:BeforeSign }
+inscription_entreprise:
+    path:     /inscrientreprise
+    defaults: { _controller: ProfilBundle:Default:inscriptionEntreprise }
+login:
+    path:     /loginn
+    defaults: { _controller: ProfilBundle:Default:Login }
+profil:
+    path:     /profil
+    defaults: { _controller: ProfilBundle:Apropos:view }
+updateprofil:
+    path:     /updateprofil/{id}
+    defaults: { _controller: ProfilBundle:Apropos:update }
+Ajout_formation:
+    path:     /ajoutprofil
+    defaults: { _controller: ProfilBundle:formation:Ajouterformation }
+Modifier_formation:
+    path:     /modifierformation/{id}
+    defaults: { _controller: ProfilBundle:formation:updateformation }
+delete_formation:
+  path:     /deleteformation/{id}
+  defaults: { _controller: ProfilBundle:formation:Delete }
+Ajout_Experience:
+    path:     /ajoutexperience
+    defaults: { _controller: ProfilBundle:Experience:AjouterExperience }
+Afficher_Experience:
+    path:     /afficherexperience/{id}
+    defaults: { _controller: ProfilBundle:Apropos:viewexperience }
+Modifier_experience:
+  path:     /modifierexperience/{id}
+  defaults: { _controller: ProfilBundle:Experience:updateexperience }
+delete_experience:
+  path:     /deleteexperience/{id}
+  defaults: { _controller: ProfilBundle:Experience:DeleteExperience }
+dashboard_admin:
+  path:     /dashbordadmin
+  defaults: { _controller: ProfilBundle:Admin:indexadmin }
+Ajout_Certif:
+  path:     /ajoutcertuf
+  defaults: { _controller: ProfilBundle:Certification:AjouterCertificat }
+Modifier_certif:
+  path:     /modifiercertif/{id}
+  defaults: { _controller: ProfilBundle:Certification:updatecertif}
+delete_certif:
+  path:     /deletecertif/{id}
+  defaults: { _controller: ProfilBundle:Certification:Deletecertif}
+Ajout_Competence:
+  path:     /ajoutcomp
+  defaults: { _controller: ProfilBundle:Competence:AjouterCompetence }
+Modifier_comp:
+  path:     /modifiercomp/{id}
+  defaults: { _controller: ProfilBundle:Competence:updateComp}
+delete_comp:
+  path:     /deletecomp/{id}
+  defaults: { _controller: ProfilBundle:Competence:DeleteComp}
+Ajout_Langue:
+  path:     /ajoutlangue
+  defaults: { _controller: ProfilBundle:Langue:AjouterLangue }
+Modifier_Langue:
+  path:     /modifierlangue/{id}
+  defaults: { _controller: ProfilBundle:Langue:updateLangue}
+delete_Langue:
+  path:     /deletelangue/{id}
+  defaults: { _controller: ProfilBundle:Langue:DeleteLangue}
+Pdf:
+  path:     /upload
+  defaults: { _controller: ProfilBundle:Apropos:Pdf}
+upload_pdf:
+  path:     /generatePDF
+  defaults: { _controller: ProfilBundle:Apropos:uploadPdf}
+profil_entreprise:
+  path:     /dashbentreprise
+  defaults: { _controller: ProfilBundle:Apropos:dashEntreprise}
+Modifier_profil_entreprise:
+  path:     /modifierpro/{id}
+  defaults: { _controller: ProfilBundle:Apropos:updateEntreprise}
+Afficher_entreprise:
+  path:     /affich/{id}
+  defaults: { _controller: ProfilBundle:Apropos:afficherEntreprise}
+Afficher_freelancer:
+  path:     /affichfree/{id}
+  defaults: { _controller: ProfilBundle:Apropos:afficherFreelancer}
+dash_freelancer:
+  path:     /dashfree
+  defaults: { _controller: ProfilBundle:Apropos:dashFreelancer}
+dash_entre:
+  path:     /dashentre
+  defaults: { _controller: ProfilBundle:Apropos:dashEntre}
+Liste_entreprise:
+  path:     /listetreprise
+  defaults: { _controller: ProfilBundle:Apropos:listeEntre}
+Liste_freelancer:
+  path:     /listefreelancer
+  defaults: { _controller: ProfilBundle:Apropos:listefreelancer}
+bannir_user:
+  path:     /admin/bannirUser/{id}
+  defaults: { _controller: ProfilBundle:Admin:bannirUser}
+approuver_user:
+  path:     /admin/approuverUser/{id}
+  defaults: { _controller: ProfilBundle:Admin:approuverUser}
+abonner:
+  path:     /abonner/{id}
+  defaults: { _controller: ProfilBundle:Apropos:abonner}
+message:
+  path:     /message
+  defaults: { _controller: ProfilBundle:Apropos:message}
+cv:
+  path:     /cv
+  defaults: { _controller: ProfilBundle:Apropos:showCV}
+Json_formation:
+  path:     /formation/{id}
+  defaults: { _controller: ProfilBundle:Apropos:jsonFormation}
+Json_experience:
+  path:     /experience/{id}
+  defaults: { _controller: ProfilBundle:Apropos:jsonExperience}
+Json_competence:
+  path:     /competence/{id}
+  defaults: { _controller: ProfilBundle:Apropos:jsonCompetence}
+Json_certificat:
+  path:     /certifica/{id}
+  defaults: { _controller: ProfilBundle:Apropos:jsonCertification}
+Json_abonnemement:
+  path:     /abonnement/{id}
+  defaults: { _controller: ProfilBundle:Apropos:jsonAbonnement}
+Json_langue:
+  path:     /langue/{id}
+  defaults: { _controller: ProfilBundle:Apropos:jsonLangue}
+Json_rate:
+  path:     /rate/{id}
+  defaults: { _controller: ProfilBundle:Apropos:jsonRate}
+Json_contact:
+  path:     /contact/{id}
+  defaults: { _controller: ProfilBundle:Contact:jsonContact}
+Json_ajout_forma:
+  path:     /forma
+  defaults: { _controller: ProfilBundle:formation:AjouterformationWS}
+Json_edit_forma:
+  path:     /editforma
+  defaults: { _controller: ProfilBundle:formation:updateformationWS}
+Json_delete_forma:
+  path:     /deleteforma/{id}
+  defaults: { _controller: ProfilBundle:formation:DeleteWS}
+Json_ajout_experience:
+  path:     /experience
+  defaults: { _controller: ProfilBundle:Experience:AjouterExperienceWS}
+Json_edit_experience:
+  path:     /editexperience
+  defaults: { _controller: ProfilBundle:Experience:updateexperienceWS}
+Json_delete_experience:
+  path:     /deleteexpe/{id}
+  defaults: { _controller: ProfilBundle:Experience:DeleteExperienceWS}
+Json_ajout_certif:
+  path:     /certificat
+  defaults: { _controller: ProfilBundle:Certification:AjouterCertificatWc}
+Json_edit_certif:
+  path:     /editcertificat
+  defaults: { _controller: ProfilBundle:Certification:updatecertifWc}
+Json_delete_certif:
+  path:     /deletecertificat/{id}
+  defaults: { _controller: ProfilBundle:Certification:DeletecertifWc}
+Json_ajout_langue:
+  path:     /langue
+  defaults: { _controller: ProfilBundle:Langue:AjouterLangueWS}
+Json_edit_langue:
+  path:     /editlangue
+  defaults: { _controller: ProfilBundle:Langue:updateLangueWS}
+Json_delete_langue:
+  path:     /deletelanguee/{id}
+  defaults: { _controller: ProfilBundle:Langue:DeleteLangueWS}
+Json_ajout_competence:
+  path:     /competence
+  defaults: { _controller: ProfilBundle:Competence:AjouterCompetenceWS}
+Json_edit_competence:
+  path:     /editcompetence
+  defaults: { _controller: ProfilBundle:Competence:updateCompWS}
+Json_delete_competence:
+  path:     /deletecompetence/{id}
+  defaults: { _controller: ProfilBundle:Competence:DeleteCompWS}
+Json_affich_user:
+  path:     /user
+  defaults: { _controller: ProfilBundle:Apropos:viewWS}
+Json_edit_user:
+  path:     /edituser
+  defaults: { _controller: ProfilBundle:Apropos:updateWS}
+Json_affich_liste_free:
+  path:     /free
+  defaults: { _controller: ProfilBundle:Apropos:listefreelancerWS}
+Json_edit_liste_entre:
+  path:     /entr
+  defaults: { _controller: ProfilBundle:Apropos:listeEntreWS}
+log:
+  path:     /log/{username}
+  defaults: { _controller: ProfilBundle:Apropos:Log}
+addRateWS:
+  path:     /adRateWS
+  defaults: { _controller: ProfilBundle:Apropos:AjouterRate}
+changeImage:
+  path:     /changeImage
+  defaults: { _controller: ProfilBundle:Apropos:changeImage}
+afficherRate:
+  path:     /affRate/{id}
+  defaults: { _controller: ProfilBundle:Apropos:AfficherRate}

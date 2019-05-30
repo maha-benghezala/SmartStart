@@ -1,0 +1,79 @@
+{% extends('Basee.html.twig') %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block section %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+<body class="bg-grea">
+<div class="page_loader"></div>
+
+<!-- Contact section start -->
+<div class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Form content box start -->
+                <div class="form-content-box">
+                    <!-- details -->
+                    <div class="details">
+                        <!-- Logo -->
+                        <a href="index.html">
+                            <img src="img/black-logo.png" class="cm-logo" alt="black-logo">
+                        </a>
+                        <!-- Name -->
+                        <h3>Page de connexion</h3>
+                        <!-- Form start -->
+                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                            {% if csrf_token %}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                            {% endif %}
+                            <div class="form-group">
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" name="_password" class="form-control" required="required" />
+                            </div>
+                            <div class="checkbox">
+                                <div class="ez-checkbox pull-left">
+                                    <label>
+                                        <input type="checkbox" class="ez-hide">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a href="forgot-password.html" class="link-not-important pull-right">Forgot Password</a>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group mb-0">
+                                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="form-control btn-md button-theme btn-block"/>
+
+                            </div>
+                        </form>
+                        <!-- Social List -->
+                        <ul class="social-list clearfix">
+                            <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- Footer -->
+                    <div class="footer">
+                        <span>Don't have an account? <a href="{{ path('before_signup') }}">Register here</a></span>
+                    </div>
+                </div>
+                <!-- Form content box end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact section end -->
+
+<!-- Full Page Search -->
+<div id="full-page-search">
+    <button type="button" class="close">×</button>
+    <form action="index.html#">
+        <input type="search" value="" placeholder="type keyword(s) here" />
+        <button type="submit" class="btn btn-sm button-theme">Search</button>
+    </form>
+</div>
+{% endblock %}

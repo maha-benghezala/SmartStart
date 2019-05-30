@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <!-- External CSS libraries -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-submenu.css')}}">
+    <link rel="stylesheet" href="{{ asset('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css ')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/magnific-popup.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/daterangepicker.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/leaflet.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/map.css')}}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/flaticon/font/flaticon.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/linearicons/style.css')}}">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/jquery.mCustomScrollbar.css')}}">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/dropzone.css')}}">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/slick.css')}}">
+    <script src="{{ asset('https://code.jquery.com/jquery-1.12.4.js') }}"></script>
+    <script src="{{ asset('https://code.jquery.com/ui/1.12.1/jquery-ui.js') }}">
+
+    </script>
+    <link rel="stylesheet" href="{{ asset('https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css') }}">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('css/skins/midnight-blue.css')}}">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico')}}" type="image/x-icon" >
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,300,700">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Dosis%7CMontserrat:200,300,400,500,600,700,800,900%7CNunito+Sans:200,300,400,600,700,800,900">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/ie10-viewport-bug-workaround.css')}}">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script  src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script  src="/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script  src="js/html5shiv.min.js"></script>
+    <script  src="js/respond.min.js"></script>
+
+    <![endif]-->
+    <title>{% block title %}
+        {% endblock %}</title>
+</head>
+<body>
+<header class="main-header header-2 fixed-header">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand logo pad-0" href="index.html">
+                <img src="img/logos/black-logo.png" alt="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto d-lg-none d-xl-none">
+                    <li class="nav-item dropdown">
+                        <a href="" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a href="" class="nav-link">Logout</a>
+                    </li>
+
+                </ul>
+                <div class="navbar-buttons ml-auto d-none d-xl-block d-lg-block">
+                    <ul>
+                        <li>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <div class="dropdown btns">
+                                <a class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="{{ asset(app.user.image) }}" alt="avatar">
+                                    Hi, {{ app.user.nomsc}}
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="">Dashboard</a>
+                                    <a class="dropdown-item" href="">Messages</a>
+                                    <a class="dropdown-item" href="">Edit profile</a>
+                                    <a class="dropdown-item" href="">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}" class="btn btn-theme btn-md"><i class="fa fa-sign-out"></i>Logout</a>
+                        </li>
+                        {% else %}
+                            <a href="{{ path('login') }}" class="btn btn-theme btn-md">Login</a>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- Main header end -->
+
+<!-- Dashbord start -->
+<div class="dashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-12 col-sm-12 col-pad">
+                <div class="dashboard-nav d-none d-xl-block d-lg-block">
+                    <div class="dashboard-inner">
+                        <h4>Main</h4>
+                        <ul>
+                            <li class="active"><a href="employer-dashboard.html"><i class="flaticon-dashboard"></i>Dashboard</a></li>
+                            <li><a href="employer-dashboard-post-job.html"><i class="flaticon-plus"></i>Post a New Job</a></li>
+                            <li><a href="employer-dashboard-manage-candidate.html"><i class="flaticon-user-1"></i>Manage Candidate</a></li>
+                            <li><a href="employer-dashboard-manage-job.html"><i class="flaticon-work"></i>Manage Jobs</a></li>
+                            <li><a href="employer-dashboard-messages.html"><i class="flaticon-mail"></i>Messages<span class="nav-tag">6</span></a></li>
+                            <li><a href="employer-dashboard-transaction.html"><i class="flaticon-buy"></i>Transaction</a></li>
+                            <li><a href="employer-dashboard-change-password.html"><i class="flaticon-lock"></i>Change Password</a></li>
+                        </ul>
+                        <h4>Account</h4>
+                        <ul>
+                            <li><a href="employer-dashboard-edit-profile.html"><i class="flaticon-user"></i>Edit Profile</a></li>
+                            <li><a href="index.html"><i class="flaticon-logout"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    {% block section %}
+    {% endblock %}
+</div>
+
+</body>
+
+<script src="{{ asset('js/jquery-2.2.0.min.js')}}"></script>
+<script src="{{ asset('js/popper.min.js')}}"></script>
+<script src="{{ asset('js/bootstrap.min.js')}}"></script>
+<script  src="{{ asset('js/bootstrap-submenu.js')}}"></script>
+<script  src="{{ asset('js/rangeslider.js')}}"></script>
+<script  src="{{ asset('js/jquery.mb.YTPlayer.js')}}"></script>
+<script  src="{{ asset('js/bootstrap-select.min.js')}}"></script>
+<script  src="{{ asset('js/jquery.easing.1.3.js')}}"></script>
+<script  src="{{ asset('js/jquery.scrollUp.js')}}"></script>
+<script  src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<script  src="{{ asset('js/leaflet.js')}}"></script>
+<script  src="{{ asset('js/leaflet-providers.js')}}"></script>
+<script  src="{{ asset('js/leaflet.markercluster.js')}}"></script>
+<script  src="{{ asset('js/moment.min.js')}}"></script>
+<script  src="{{ asset('js/daterangepicker.min.js')}}"></script>
+<script  src="{{ asset('js/dropzone.js')}}"></script>
+<script  src="{{ asset('js/slick.min.js')}}"></script>
+<script  src="{{ asset('js/jquery.filterizr.js')}}"></script>
+<script  src="{{ asset('js/jquery.magnific-popup.min.js')}}"></script>
+<script  src="{{ asset('js/jquery.countdown.js')}}"></script>
+<script  src="{{ asset('js/maps.js')}}"></script>
+<script  src="{{ asset('js/app.js')}}"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script  src="{{ asset('js/ie10-viewport-bug-workaround.js')}}"></script>
+<!-- Custom javascript -->
+<script  src="{{ asset('js/ie10-viewport-bug-workaround.js')}}"></script>
+{% block js %}
+{% endblock %}
+
+</html>

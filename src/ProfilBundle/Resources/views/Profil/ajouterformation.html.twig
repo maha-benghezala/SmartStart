@@ -1,0 +1,41 @@
+{% block section %}
+<h4 class="bg-grea-3">Education</h4>
+{{ form_start(form) }}
+<div class="search-form">
+    <div class="row pad-20">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group">
+                {{ form_label(form.nomecole)}}
+                {{ form_widget(form.nomecole)}}
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group">
+                {{ form_label(form.diplome)}}
+                {{ form_widget(form.diplome)}}
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group">
+                {{ form_label(form.anneediplome)}}
+                {{ form_widget(form.anneediplome)}}
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group">
+                {{ form_label(form.domaine)}}
+                {{ form_widget(form.domaine)}}
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                {{ form_label(form.description)}}
+                {{ form_widget(form.description)}}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="post-btn"><a href="" class="btn btn-md button-theme">{{ form_widget(form.Ajouter)}}</a></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

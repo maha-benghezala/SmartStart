@@ -1,0 +1,79 @@
+{% extends('base.html.twig') %}
+{% block section %}
+
+
+
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <!-- Option bar start -->
+
+                <div class="option-bar d-none d-xl-block d-lg-block d-md-block d-sm-block">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-7 col-sm-7">
+                               <div class="sorting-options2">
+                                <span class="sort">Liste des Entreprises</span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-5 col-sm-5">
+                            <div class="sorting-options">
+                                <a href="list-sidebar.html" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
+                                <a href="grid-sidebar.html" class="change-view-btn"><i class="fa fa-th-large"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% for f in user %}
+                    {% for r in f.Roles %}
+                        {% if  r =="ROLE_ENTREPRISE" %}
+                <!-- Emplayer box start -->
+                <div class="employer-box">
+                    <div class="employer-photo">
+                        <a href="#">
+                            <img src="{{ f.image}}"  alt="logo">
+                        </a>
+                    </div>
+                    <div class="employer-info">
+
+                        <h5><a href="{{ path('Afficher_entreprise',{'id':f.id}) }}">{{ f.nomsc }} </a></h5>
+                        <div class="employer-meta">
+                            <i class="flaticon-pin"></i>{{ f.adresse }}
+                        </div>
+
+                        <p>{{ f.description }}</p>
+                    </div>
+                    <div class="new-user-box">
+
+                        <div class="user-content">
+                            {% for abonnement in abonnement %}
+                                {% if abonnement.identreprise != f %}
+                            <div class="f-right">
+                                <a href="{{ path('abonner',{'id':f.id}) }}" class="follow">S'abonner</a>
+                            </div>
+                                {% endif %}
+                                {% if abonnement.identreprise == f %}
+                                    <div class="f-right">
+                                        <a href="" class="follow">abonné</a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+
+                <!-- Page navigation start -->
+                <div class="pagination-box hidden-mb-45 text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <div class="text-center">{{ knp_pagination_render(user) }}</div>
+
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+
+{% endblock %}

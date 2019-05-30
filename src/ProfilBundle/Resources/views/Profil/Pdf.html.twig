@@ -1,0 +1,156 @@
+<html>
+ <head>
+    <title>Mon CV </title>
+    <meta charset="utf-8">
+ </head>
+ <body>
+ <style>
+     .page{
+         width: 780px;
+         margin: auto;
+         font-size: 20px;
+         font-family: 'Source Sans Pro',Calibri,Tahoma,Sans-Serif;
+     }
+     .infophoto{
+         height: 250px;
+         margin-right: 0px;!important;
+
+     }
+     .info{
+         float: left;
+     }
+     .photo{
+
+   float: right;
+
+
+
+     }
+     .section{
+         margin-bottom: 70px;
+         text-align: justify;
+     }
+     .sec-gauche{
+         float: left;
+         font-weight: bold;
+         font-size: 20px;
+     }
+     .sec-droite{
+         margin-left: 300px;
+     }
+     strong{
+         font-size:26px;
+     }
+     h2{
+         font-size: 28px;
+         color: #3388BB;
+         text-transform: uppercase;
+         border-bottom: 3px solid #3388DD;
+     }
+     .titre{
+         font-weight: bold;
+         font-size: 20px;
+     }
+
+
+ </style>
+  <div class="page">
+
+       {% for f in user %}
+
+    <div class="infophoto col-md-12">
+       <div class="info col-md-6">
+           <p><strong>{{ f.prenom }} {{ f.nom }}</strong><br/>
+               {{ f.ville }}
+           </p>
+           <p> {{ f.telephone}} <br>
+               {{ f.email}}
+               </p>
+           <p>{{ f.poste }} -{{ f.adresse }}</p>
+
+
+
+       </div>
+
+        <div class="photo" ><img src="{{ asset(app.user.image) }}" style="width: 300px; margin-right:10px ;height: 200px"></div>
+     {% endfor %}
+    </div>
+     <div class="section">
+      <h2>Apropos de Moi</h2>
+      {% for f in user %}
+         <p><span class="titre">{{ f.description }}</span><br/>
+      {% endfor %}
+  </div>
+    <div class="section">
+        <h2>Formation</h2>
+        {% for f in formation %}
+        <div class="sec-gauche">
+            {{ f.getAnneediplome()|date }}
+        </div>
+        <div class="sec-droite">
+            <p><span class="titre">{{ f.nomecole }}/{{ f.diplome }}</span><br/>
+            {{ f.domaine}}<br>
+           </p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="section">
+        <h2>Experience</h2>
+        {% for exp in experience %}
+        <div class="sec-gauche">
+           <span> {{ exp.anneedebut }} - {{ exp.anneefin }}</span>
+        </div>
+        <div class="sec-droite">
+            <p><span class="titre">{{ exp.intituleposte }}/ {{ exp.nomentreprise }}</span><br/>
+                {{ exp.secteur }}<br>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="section">
+        <h2>Certification</h2>
+        {% for cert in certification %}
+            <div class="sec-gauche">
+                {{ cert.moisdebut }}-{{ cert.moisfin }}<br>
+                {{ cert.anneedebut }}-{{ cert.anneefin }}
+            </div>
+            <div class="sec-droite">
+                <p><span class="titre">{{ cert.nomcertif}} / {{cert.organisme }}</span><br/>
+                    {{ cert.url }}<br>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+               <h2>Compétences</h2>
+               {% for comp in competence %}
+                   <div class="sec-gauche">
+
+                   </div>
+                   <div class="sec-droite">
+                       <span class="titre">{{ comp.nomcompetence}}</span>
+
+                   </div>
+               {% endfor %}
+           </div>
+
+
+  <div class="section">
+      <h2>Langues</h2>
+      {% for langue in langue %}
+          <div class="sec-gauche" class="titre">
+              {{ langue.langue}}
+          </div>
+          <div class="sec-droite">
+              <p><span >{{ langue.niveau}}</span><br/>
+              </p>
+          </div>
+      {% endfor %}
+  </div>
+
+
+
+  </div>
+ </body>
+</html>

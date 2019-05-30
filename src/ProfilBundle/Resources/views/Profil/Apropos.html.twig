@@ -1,0 +1,1265 @@
+{% extends('base.html.twig') %}
+
+{% block section %}
+    <style>
+
+        .info{
+
+            float: right;
+            margin-left: 50px;
+        }
+        .photo {
+            float: left;
+
+        }
+    </style>
+<div class="candidate-section content-area">
+    <div class="container" >
+        <div class="row">
+            {% for f in user %}
+            {% for r in f.Roles %}
+            {% if  r =="ROLE_FREELANCER" %}
+
+            <div class="col-lg-12 col-md-12">
+                <!-- job box start -->
+              <div class="job-box-2">
+               <div class="description">
+
+                    <div class="education mb-50">
+                        <div class="education-box">
+                            <!-- Edit profile photo -->
+
+                            <div class="photo" >
+                                <!-- Edit profile photo -->
+                                <div class="edit-profile-photo">
+                                    {{ form_start(form) }}
+                                    <img src="{{ asset(app.user.image) }}" style="width: 200px; margin-right: 0px ;height: 200px" >
+                                    <div class="change-photo-btn">
+                                        <div class="photoUpload">
+                                            <span><i class="fa fa-upload"></i></span>
+                                            {{ form_widget(form.image) }}
+                                        </div>
+                                    </div>
+                                </div>
+<br>
+                                        {{ form_widget(form.modifierPhoto) }}
+                                        {{ form_end(form) }}
+                            </div>
+                            <div class="info">
+                               <h3 class="heading-2">{{ f.prenom }} {{ f.nom }} <a id="user{{ f.id }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></h3>
+                                <div class="col-sm-4">
+                                    <h6>{{ f.poste }}</h6>
+                                    <p>{{ f.adresse }}</p>
+                                </div>
+                              <div class="col-sm-4">
+                                <h8>{{ f.telephone}}</h8>
+
+                              </div>
+                              <div class="col-sm-4">
+                                <h8>{{ f.email}}</h8>
+
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+              <hr class="hr-boder clearfix">
+                <!-- about me start -->
+                <div class="about-me mb-40">
+                    <h3 class="heading-2">About Me</h3>
+                    <p>{{ f.description }}</p>
+                </div>
+
+
+                <!-- Education start-->
+                   <hr class="hr-boder clearfix">
+
+                <div class="education mb-50">
+                    <h3 class="heading-2">Education  <a id="ajoutformation" class="btn btn-primary"><i class="fa fa-plus"></i></a></h3>
+                    <div id="educationReload">
+                    {% for f in formation %}
+                    <div class="education-box">
+                        <div class="icon">
+
+                            <i class="flaticon-mortarboard"></i>
+
+                        </div>
+                        <div class="employer-info">
+                            <h5><input type="text" value="{{ f.nomecole }}" id="ecole{{ f.id }}" style="display: none">{{ f.nomecole }}<span> /{{ f.diplome }} </span><a id="formation{{ f.id }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a><a href="{{ path('delete_formation',{'id':f.id}) }}" class="btn btn-primary"><i id="formation{{ f.id }}" class="fa fa-remove"></i></a></h5>
+                            <h6>{{ f.anneediplome }}</h6>
+                            <h5> {{ f.domaine}}</h5>
+                            <p>{{ f.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                <hr class="hr-boder clearfix">
+                <!-- Work experiance start-->
+                <div class="work-experiance mb-50">
+                    <h3 class="heading-2">Work Experiance <a id="ajoutexperience" class="btn btn-primary"><i class="fa fa-plus"></i></a></h3>
+                    {% for exp in experience %}
+                    <div class="education-box">
+                        <div class="icon">
+                            <i class="flaticon-work"></i>
+                        </div>
+                        <div class="employer-info">
+                            <h5><input type="text" value="{{ exp.intituleposte}}" id="ecole{{ exp.id }}" style="display: none">{{ exp.intituleposte }} <span> / {{ exp.nomentreprise }}</span>
+                                <a id="experience{{ exp.id }}" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                </a><a href="{{ path('delete_experience',{'id':exp.id}) }}" class="btn btn-primary"><i id="experience{{ exp.id }}" class="fa fa-remove"></i></a></h5>
+                            <h6>{{ exp.anneedebut }} - {{ exp.anneefin }}</h6>
+                            <h6>{{ exp.secteur }}</h6>
+                             <p>{{ exp.description }}</p>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+                <hr class="hr-boder clearfix">
+                <!-- Work certificat start-->
+                <div class="work-experiance mb-50">
+
+                    <h3 class="heading-2">Certification <a  id="ajoutcertif" class="btn btn-primary"><i class="fa fa-plus"></i></a></h3>
+
+                    {% for cert in certification %}
+                        <div class="education-box">
+                            <div class="icon">
+                                <i class="fa fa-certificate"></i>
+                            </div>
+                            <div class="employer-info">
+                                <h5><input type="text" value="{{ cert.nomcertif}}" id="certif{{ cert.id }}" style="display: none">{{ cert.nomcertif}} <span> / {{cert.organisme }}</span>
+                                    <a id="certificat{{ cert.id }}" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                    </a><a  href="{{ path('delete_certif',{'id':cert.id}) }}"class="btn btn-primary"><i id="certificat{{ cert.id }}" class="fa fa-remove"></i></a></h5>
+                                <h6>{{ cert.moisdebut }}/{{ cert.anneedebut }} -{{ cert.moisfin }}/{{ cert.anneefin }}</h6>
+                                <h6>{{ cert.url }}</h6>
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+                <hr class="hr-boder clearfix">
+                <!-- Work competence start-->
+                <div class="work-experiance mb-50">
+
+                    <h3 class="heading-2">Competence <a id="ajoutcom" class="btn btn-primary"><i class="fa fa-plus"></i></a></h3>
+
+                    {% for comp in competence %}
+                        <div class="education-box">
+                            <div class="icon">
+                                <i class="fa fa-cogs"></i>
+                            </div>
+                            <div class="employer-info">
+                                <h5><input type="text" value="{{ comp.nomcompetence}}" id="nomcompt{{ comp.id }}" style="display: none">{{ comp.nomcompetence}}
+                                    <a id="competence{{comp.id }}" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                    </a><a  href="{{ path('delete_comp',{'id':comp.id}) }}"class="btn btn-primary"><i  class="fa fa-remove"></i></a></h5>
+
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+                <hr class="hr-boder clearfix">
+                <!-- Work competence start-->
+                <div class="work-experiance mb-50">
+
+                    <h3 class="heading-2">Langue <a  id="ajoutlangue" class="btn btn-primary"><i class="fa fa-plus"></i></a></h3>
+
+                    {% for langue in langue %}
+                        <div class="education-box">
+                            <div class="icon">
+                                <i class="fa fa-language"></i>
+                            </div>
+                            <div class="employer-info">
+                                <h5><input type="text" value="{{ langue.langue}}" id="langue{{langue.id}}" style="display: none">{{ langue.langue}} / {{ langue.niveau}}
+                                    <a id="languee{{langue.id }}" class="btn btn-primary"><i class="fa fa-pencil"></i>
+                                    </a><a  href="{{ path('delete_Langue',{'id':langue.id}) }}"class="btn btn-primary"><i id="lan{{ langue.id }}" class="fa fa-remove"></i></a></h5>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </div>
+    <div>
+    {% for formation in formation %}
+        <div id="dialog{{ formation.id }}" title="Modifier formation" class="form-control" style="display: none">
+            <div class="submit-address dashboard-list">
+                <form method="GET">
+                    <fieldset>
+                        <div class="search-form">
+                            <div class="row pad-20">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nom ecole</label>
+                                        <input type="text" name="nomecole"class="input-text" id="nomecole{{ formation.id }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Diplome</label>
+                                        <input type="text" name="diplome" class="input-text" id="diplome{{ formation.id }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Annee diplome</label>
+                                        <input type="number" name="anneediplome" class="input-text" id="anneediplome{{ formation.id }}" >
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Domaine</label>
+                                        <input type="text" name="domaine" class="input-text" id="domaine{{ formation.id }}" >
+                                    </div>
+                                </div>
+                                <div  class="col-lg-6 col-md-6 ">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <label for="description"></label>
+                                        <textarea name="description" class="input-text" id="description{{ formation.id }}" ></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="post-btn" align="center"><a  type="button" id="button{{ formation.id }}" class="btn btn-md button-theme">Modifier</a></div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+    <div id="dialog" title="Ajouter Formation" class="form-control" style="display: none">
+        <div class="submit-address dashboard-list">
+            <form method="GET">
+                <fieldset>
+                    <div class="search-form">
+                        <div class="row pad-20">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Nom ecole</label>
+                                    <input type="text" name="nomecole"class="input-text" id="ajoutnomecole">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Diplome</label>
+                                    <input type="text" name="diplome" class="input-text" id="ajoutdiplome">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Annee diplome</label>
+                                    <input type="number" name="anneediplome" class="input-text" id="ajoutanneediplome" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Domaine</label>
+                                    <input type="text" name="domaine" class="input-text" id="ajoutdomaine" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 ">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <label for="description"></label><textarea name="description" class="input-text" id="ajoutdescription" ></textarea>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="post-btn" align="center"><a  type="button" id="button" class="btn btn-md button-theme">Ajouter</a></div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="dialog1" title="Ajouter Expérience" class="form-control" style="display: none">
+        <div class="submit-address dashboard-list">
+            <form method="GET">
+                <fieldset>
+                    <div class="search-form">
+                        <div class="row pad-20">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Intitulé Poste</label>
+                                    <input type="text" class="input-text" name="post" id ="ajoutposte">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Entreprise</label>
+                                    <input type="text" class="input-text" name="entreprise" id="ajoutentreprise">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Lieu</label>
+                                    <input type="text" class="input-text" name="lieu" id="ajoutlieu">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Année debut</label>
+                                    <input type="text" class="input-text" name="anneedebut" id="ajoutanneedebut">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Année Fin</label>
+                                    <input type="text" class="input-text" name="anneefin" id="ajoutanneefin" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Secteur</label>
+                                    <input type="text" class="input-text" name="secteur" id="ajoutsecteur" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="input-text" name="description" id="ajoutdescription" ></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="post-btn" align="center"><a  type="button" id="buttonn" class="btn btn-md button-theme">Ajouter</a></div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+        {% for experience in experience %}
+    <div id="dialog1{{ experience.id }}" title="Modifier Expérience" class="form-control" style="display: none">
+        <div class="submit-address dashboard-list">
+            <form method="GET">
+                    <fieldset>
+                        <div class="search-form">
+                            <div class="row pad-20">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Intitulé Poste</label>
+                                        <input type="text" class="input-text" name="post" id ="modposte{{ experience.id }}" >
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Entreprise</label>
+                                        <input type="text" class="input-text" name="entreprise" id="modentreprise{{ experience.id }}" >
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Lieu</label>
+                                        <input type="text" class="input-text" name="lieu" id="modlieu{{ experience.id }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Année debut</label>
+                                        <input type="text" class="input-text" name="anneedebut" id="modanneedebut{{ experience.id }}" >
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Année Fin</label>
+                                        <input type="text" class="input-text" name="anneefin" id="modanneefin{{ experience.id }}" >
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Secteur</label>
+                                        <input type="text" class="input-text" name="secteur" id="modsecteur{{ experience.id }}" >
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="input-text" name="description" id="moddescription{{ experience.id }}" ></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="post-btn" align="center"><a  type="button" id="modifexp{{ experience.id }}" class="btn btn-md button-theme">Modifier</a></div>
+                        </div>
+
+                    </fieldset>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+   {% endfor %}
+   {% for u in user %}
+       <br><br><br>
+    <div id="dialog2{{ u.id }}" title="Modifier Profil" class="form-control" style="display: none">
+     <div class="submit-address dashboard-list">
+        <form method="GET">
+            <div class="search-form">
+                <div class="row pad-20">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Prenom</label>
+                            <input type="text" class="input-text" name="name" id="prenom{{ u.id }}" placeholder="Your Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Nom</label>
+                            <input type="text" class="input-text" name="name" id="nom{{ u.id }}" placeholder="Your Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Poste</label>
+                            <input type="text" class="input-text" name="Poste"  id="poste{{ u.id }}" placeholder="Votre Poste Actuelle">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Adresse</label>
+                            <input type="text" class="input-text" name="adresse"  id="adresse{{ u.id }}" placeholder="Votre Adresse">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Ville</label>
+                            <input type="text" class="input-text" name="ville"  id="ville{{ u.id }}" placeholder="votre ville">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input class="input-text" name="email"  id="email{{ u.id }}" placeholder="mail@serveur.com">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="input-text" name="message" id="descriptionn{{ u.id }}" placeholder="Detailed Information"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-btn">
+                    <a href="#" id="modprofil{{ u.id }}"class="btn btn-md button-theme" style="right:10px ">Modifier</a>
+                    <a href="#" id="fermer{{ u.id }}"class="btn btn-md button-theme " style="left: 40px" >Fermer</a>
+                </div>
+
+            </div>
+
+        </form>
+     </div>
+    </div>
+   {% endfor %}
+    <div id="dialog3" title="Ajouter Certification" class="form-control" style="display: none">
+        <div class="submit-address dashboard-list">
+            <form method="GET"id="form">
+
+                <div class="search-form">
+                    <div class="row pad-20">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Nom de Certificat</label>
+                                <input type="text" class="input-text" name="name" id="nomcert" placeholder="exp:CCNA">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Organisme</label>
+                                <input type="text" class="input-text" name="name" id="oraganisme" placeholder="exp:CISCO">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <input id="check" type="checkbox" name="check">
+                                <label for="check">Cette certif ne s'exprime pas ?</label>
+                                <label for="moisd" >Mois Debut</label>
+                                <select id="moisd" class="form-control">
+                                    <option value="">Sélectionnez un mois</option>
+                                    <option value="Janvier">Janvier</option>
+                                    <option value="Fevrier">Fevrier</option>
+                                    <option value="Mars">Mars</option>
+                                    <option value="Avril">Avril</option>
+                                    <option value="Mai">Mai</option>
+                                    <option value="Juin">Juin</option>
+                                    <option value="Juillet">Juillet</option>
+                                    <option value="Aout">Aout</option>
+                                    <option value="Septembre">Septembre</option>
+                                    <option value="Octobre">Octobre</option>
+                                    <option value="Novembre">Novembre</option>
+                                    <option value="Decembre">Decembre</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <br>
+                                <label for="moisf" id="labelMoisFin">Mois Fin</label>
+                                <select id="moisf" class="form-control">
+                                    <option value="">Sélectionnez un mois</option>
+                                    <option value="Janvier">Janvier</option>
+                                    <option value="Fevrier">Fevrier</option>
+                                    <option value="Mars">Mars</option>
+                                    <option value="Avril">Avril</option>
+                                    <option value="Mai">Mai</option>
+                                    <option value="Juin">Juin</option>
+                                    <option value="Juillet">Juillet</option>
+                                    <option value="Aout">Aout</option>
+                                    <option value="Septembre">Septembre</option>
+                                    <option value="Octobre">Octobre</option>
+                                    <option value="Novembre">Novembre</option>
+                                    <option value="Decembre">Decembre</option>
+
+
+                                </select>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Année Debut</label>
+                                <input type="text" class="input-text" name="annee"  id="anneed" >
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label id="label_Annee_Fin">Année Fin</label>
+                                <input type="text" class="input-text" id="anneef">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Url</label>
+                                <input type="text" name="message" id="url" class="form-control">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                        <br>
+                        <div class="post-btn" align="center"><a href="#" type="button" id="ajoutcert" class="btn btn-md button-theme">Ajouter</a></div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+    {% for cert in certification %}
+    <div id="dialog3{{ cert.id }}" title="Modifier Certificat" class="form-control" style="display: none">
+        <div class="submit-address dashboard-list">
+            <form method="GET"id="form">
+
+                <div class="search-form">
+                    <div class="row pad-20">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Nom de Certificat</label>
+                                <input type="text" class="input-text" name="name" id="modnomcert{{ cert.id }}" placeholder="exp:CCNA">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Organisme</label>
+                                <input type="text" class="input-text" name="name" id="modoraganisme{{ cert.id }}" placeholder="exp:CISCO">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <input id="check{{ cert.id }}" type="checkbox" name="check">
+                                <label for="check">Cette certif ne s'exprime pas ?</label>
+                                <label for="modmoisd" >Mois Debut</label>
+                                <select id="modmoisd{{ cert.id }}" class="form-control">
+                                    <option value="">Sélectionnez un mois</option>
+
+                                    <option value="Janvier">Janvier</option>
+                                    <option value="Fevrier">Fevrier</option>
+                                    <option value="Mars">Mars</option>
+                                    <option value="Avril">Avril</option>
+                                    <option value="Mai">Mai</option>
+                                    <option value="Juin">Juin</option>
+                                    <option value="Juillet">Juillet</option>
+                                    <option value="Aout">Aout</option>
+                                    <option value="Septembre">Septembre</option>
+                                    <option value="Octobre">Octobre</option>
+                                    <option value="Novembre">Novembre</option>
+                                    <option value="Decembre">Decembre</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <br>
+                                <label for="modmoisf" id="label_Mois_Fin">Mois Fin</label>
+                                <select id="modmoisf{{ cert.id }}" class="form-control">
+                                    <option value="">Sélectionnez un mois</option>
+                                    <option value="Janvier">Janvier</option>
+                                    <option value="Fevrier">Fevrier</option>
+                                    <option value="Mars">Mars</option>
+                                    <option value="Avril">Avril</option>
+                                    <option value="Mai">Mai</option>
+                                    <option value="Juin">Juin</option>
+                                    <option value="Juillet">Juillet</option>
+                                    <option value="Aout">Aout</option>
+                                    <option value="Septembre">Septembre</option>
+                                    <option value="Octobre">Octobre</option>
+                                    <option value="Novembre">Novembre</option>
+                                    <option value="Decembre">Decembre</option>
+
+
+                                </select>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Année Debut</label>
+                                <input type="text" class="input-text" name="annee"  id="modanneed{{ cert.id }}" >
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label id="label_annee_Fin">Année Fin</label>
+                                <input type="text" class="input-text" id="modanneef{{ cert.id }}">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Url</label>
+                                <input type="text" name="message" id="modurl{{ cert.id }}" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="post-btn"align="center"><a href="#" type="button" id="modcert{{ cert.id }}" class="btn btn-md button-theme">Modifier</a></div>
+
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+    <div id="dialog6" title="Ajouter Competence" class="form-control" style="display: none">
+        <div class="submit-address dashboard-list">
+            <form method="GET">
+
+                <div class="search-form">
+                    <div class="row pad-20">
+                        <div class="col-lg-6 col-md-6 ">
+                            <div class="form-group">
+                                <label>Nom de Competence</label>
+                                <input type="text" class="input-text" name="name" id="nomcomp" placeholder="exp:J2EE">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br>
+                    <div class="post-btn" align="center"><a href="#" type="button" id="ajoutcompp" class="btn btn-md button-theme">Ajouter</a></div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+    {% for comp in competence %}
+    <div id="dialog4{{ comp.id }}" title="Modifier Competence" class="form-control" style="display: none">
+        <div class="submit-address dashboard-list">
+            <form method="GET">
+
+                <div class="search-form">
+                    <div class="row pad-20">
+                        <div class="col-lg-6 col-md-6 ">
+                            <div class="form-group">
+                                <label>Nom de Competence</label>
+                                <input type="text" class="input-text" name="nomcomp" id="modnomcomp{{ comp.id }}" placeholder="exp:J2EE">
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="post-btn" align="center"><a href="#" type="button" id="modcompp{{ comp.id }}" class="btn btn-md button-theme">Modifier</a></div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+    <div id="dialog8" title="Ajouter Langue" class="form-control" style="display: none">
+        <div class="submit-address dashboard-list">
+            <form method="GET"id="form">
+
+                <div class="search-form">
+                    <div class="row pad-20">
+                        <div class="col-lg-6 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label>Langue</label>
+                                <input type="text" class="input-text" name="langue" id="langue" placeholder="exp:Français">
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="row pad-20">
+                        <div class="col-lg-6 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label>Niveau</label>
+                                <input type="text" class="input-text" name="niveau" id="niveau" placeholder="exp:A">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="post-btn" align="center"><a href="#" type="button" id="ajoutlang" class="btn btn-md button-theme">Ajouter</a></div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+    {% for l in langue %}
+        <div id="dialog8{{ l.id }}" title="Modifier Competence" class="form-control" style="display: none">
+            <div class="submit-address dashboard-list">
+                <form method="GET"id="form">
+
+                    <div class="search-form">
+                        <div class="row pad-20">
+                            <div class="col-lg-6 col-md-6 ">
+                                <div class="form-group">
+                                    <label>Langue</label>
+                                    <input type="text" class="input-text" name="modlangue" id="modlangue{{l.id }}" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pad-20">
+                            <div class="col-lg-6 col-md-6 col-sm-12 ">
+                                <div class="form-group">
+                                    <label>Niveau</label>
+                                    <input type="text" class="input-text" name="modniveau" id="modniveau{{ l.id }}" >
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <br>
+                        <div class="post-btn" align="center"><a href="#" type="button" id="modlang{{ l.id }}" class="btn btn-md button-theme">Modifier</a></div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Candidate section end -->
+{% endblock %}
+
+
+{% block js %}
+    <script src="{{ asset('https://code.jquery.com/jquery-1.12.4.js') }}"></script>
+    <script src="{{ asset('https://code.jquery.com/ui/1.12.1/jquery-ui.js') }}">
+
+    </script>
+    <link rel="stylesheet" href="{{ asset('https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css') }}">
+<script>
+
+
+    function popup(page) {
+        window.open(page,'popup','width=1000, height=500, toolbar=false, scrollbars=false');
+    }
+
+    {% for formation in formation %}
+
+//jquery (bib js)frontend
+        $("#formation{{ formation.id }}").click(function (e) {
+            $("#dialog{{ formation.id }}").show().dialog({height: "auto",
+                width: 600});
+            $("#nomecole{{ formation.id }}").val("{{ formation.nomecole }}");
+            $("#diplome{{ formation.id }}").val("{{ formation.diplome }}");
+            $("#anneediplome{{ formation.id }}").val("{{ formation.anneediplome }}");
+            $("#domaine{{ formation.id }}").val("{{ formation.domaine }}");
+            $("#description{{ formation.id }}").val("{{ formation.description }}");
+        });
+
+
+        $("#button{{ formation.id }}").click(function (e) {
+
+
+            var param = {
+
+                "nomecole": $("#nomecole{{ formation.id }}").val(),
+                "diplome": $("#diplome{{ formation.id }}").val(),
+
+                "anneediplome": $("#anneediplome{{ formation.id }}").val(),
+                "domaine": $("#domaine{{ formation.id }}").val(),
+                "description": $("#description{{ formation.id }}").val()
+            };
+            if ($("#anneediplome{{ formation.id }}").val().length ==4 && $.isNumeric($("#anneediplome{{ formation.id }}").val()) ) {
+                //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+                $.post("{{ path('Modifier_formation',{'id':formation.id}) }}", param, function (data) {
+
+                    if (status = "success") {
+                        alert("Success");
+                    }
+                });
+            }
+            else{
+                alert("Année erronée");
+            }
+
+        });
+ {% endfor %}
+    $("#ajoutformation").click(function (e) {
+        $("#dialog").show().dialog({height: "auto",
+            width: 600});
+    });
+    $("#button").click(function (e) {
+    if($("#ajoutnomecole").val()!= null && $("#ajoutdiplome").val()!= null && $("#ajoutanneediplome").val()!= null && $("#ajoutdomaine").val()!= null && $("#ajoutdescription").val()!= null )
+    {
+        var param = {
+
+            "nomecole": $("#ajoutnomecole").val(),
+            "diplome": $("#ajoutdiplome").val(),
+
+            "anneediplome": $("#ajoutanneediplome").val(),
+            "domaine": $("#ajoutdomaine").val(),
+            "description": $("#ajoutdescription").val()
+        };
+        if ($("#ajoutanneediplome").val().length ==4 && $.isNumeric($("#ajoutanneediplome").val()) ) {
+            //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+            $.post("{{ path('Ajout_formation') }}", param, function (data) {
+
+                if (status = "success") {
+                    $( "#educationReload" ).load( "{{ path('profil') }} #educationReload" );
+                    alert("Success");
+                    $("#dialog").hide();
+
+                }
+            });
+        }
+        else{
+            alert("Année erronée");
+        }
+    }else{
+        alert("Remplir tous les champs");
+    }
+
+    });
+    $("#ajoutexperience").click(function (e) {
+        $("#dialog1").show().dialog({height: "auto",
+            width: 600});
+    });
+    $("#buttonn").click(function (e) {
+
+if($("#ajoutposte").val()!= null && $("#ajoutentreprise").val()!= null && $("#ajoutlieu").val()!=null &&  $("#ajoutanneedebut").val()!=null && $("#ajoutanneefin").val()!=null && $("#ajoutsecteur").val()!=null)
+{
+        var param = {
+
+            "poste": $("#ajoutposte").val(),
+            "entreprise": $("#ajoutentreprise").val(),
+
+            "lieu": $("#ajoutlieu").val(),
+            "anneedebut": $("#ajoutanneedebut").val(),
+            "anneefin": $("#ajoutanneefin").val(),
+            "secteur": $("#ajoutsecteur").val(),
+            "description": $("#ajoutdescription").val()
+        };
+        if ($("#ajoutanneedebut").val().length ==4 && $.isNumeric($("#ajoutanneedebut").val()) ) {
+            if ($("#ajoutanneefin").val().length ==4 && $.isNumeric($("#ajoutanneefin").val()) ) {
+                //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+                $.post("{{ path('Ajout_Experience') }}", param, function (data) {
+
+                    if (status = "success") {
+                        alert("Success");
+                    }
+                });
+               }
+              else{
+                alert("Année erronée");
+              }
+            }
+            else{
+                alert("Année erronée");
+            }
+}else{
+    alert("Remplir tous les champs");
+}
+
+
+    });
+    {% for experience in experience %}
+
+    //jquery (bib js)frontend
+    $("#experience{{ experience.id }}").click(function (e) {
+        $("#dialog1{{ experience.id }}").show().dialog({height: "auto",
+            width: 600});
+        $("#modposte{{ experience.id }}").val("{{ experience.intituleposte }}");
+        $("#modentreprise{{ experience.id }}").val("{{ experience.nomentreprise }}");
+        $("#modlieu{{ experience.id }}").val("{{ experience.lieu }}");
+        $("#modanneedebut{{ experience.id }}").val("{{ experience.anneedebut }}");
+        $("#modanneefin{{ experience.id }}").val("{{ experience.anneefin }}");
+        $("#modsecteur{{ experience.id }}").val("{{ experience.secteur }}");
+        $("#moddescription{{ experience.id }}").val("{{ experience.description }}");
+    });
+
+
+    $("#modifexp{{ experience.id }}").click(function (e) {
+
+
+        var param = {
+
+            "poste": $("#modposte{{ experience.id }}").val(),
+            "entreprise": $("#modlieu{{ experience.id }}").val(),
+
+            "lieu": $("#modlieu{{ experience.id }}").val(),
+            "anneedebut": $("#modanneedebut{{ experience.id }}").val(),
+            "anneefin": $("#modanneefin{{ experience.id }}").val(),
+            "secteur": $("#modsecteur{{ experience.id }}").val(),
+            "description": $("#moddescription{{ experience.id }}").val()
+        };
+        if ($("#modanneedebut{{ experience.id }}").val().length ==4 && $.isNumeric($("#modanneedebut{{ experience.id }}").val()) ) {
+            if ($("#modanneefin{{ experience.id }}").val().length ==4 && $.isNumeric($("#modanneefin{{ experience.id }}").val()) ) {
+                //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+                $.post("{{ path('Modifier_experience',{'id':experience.id}) }}", param, function (data) {
+
+                    if (status = "success") {
+                        alert("Success");
+                    }
+                });
+            }
+            else{
+                alert("Année erronée");
+            }
+        }
+        else{
+            alert("Année erronée");
+        }
+
+    });
+    {% endfor %}
+    {% for user in user %}
+    $("#fermer{{ user.id }}").click(function (e) {
+        $("#dialog2{{ user.id }}").hide();
+    });
+    //jquery (bib js)frontend
+    $("#user{{ user.id }}").click(function (e) {
+        $("#dialog2{{ user.id }}").show().dialog({height: "auto",
+            width: 600});
+        $("#prenom{{ user.id }}").val("{{ user.prenom }}");
+        $("#nom{{ user.id }}").val("{{ user.nom }}");
+        $("#ville{{ user.id }}").val("{{ user.ville }}");
+        $("#email{{ user.id }}").val("{{ user.email }}");
+        $("#poste{{ user.id }}").val("{{user.poste }}");
+        $("#adresse{{ user.id }}").val("{{ user.adresse }}");
+        $("#descriptionn{{ user.id }}").val("{{ user.description }}");
+    });
+
+
+    $("#modprofil{{user.id }}").click(function (e) {
+
+
+        var param = {
+
+            "prenom": $("#prenom{{user.id }}").val(),
+            "nom": $("#nom{{user.id }}").val(),
+
+            "poste": $("#poste{{user.id }}").val(),
+            "adresse": $("#adresse{{user.id }}").val(),
+            "email": $("#email{{user.id }}").val(),
+            "ville": $("#ville{{user.id }}").val(),
+            "description": $("#descriptionn{{user.id }}").val()
+        };
+
+                //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+                $.post("{{ path('updateprofil',{'id':user.id}) }}", param, function (data) {
+
+                    if (status = "success") {
+                        alert("Success");
+                    }
+                });
+
+
+    });
+    {% endfor %}
+    $("#check").click(function () {
+      if($(this).is(':checked')){
+          console.log("clicked");
+          $("#moisf").hide();
+          $("#labelMoisFin").hide();
+          $("#anneef").hide();
+          $("#label_Annee_Fin").hide();
+      }
+      else{
+          $("#moisf").show();
+          $("#labelMoisFin").show();
+          $("#anneef").show();
+          $("#label_Annee_Fin").show();
+      }
+    });
+    $("#ajoutcertif").click(function (e) {
+        $("#dialog3").show().dialog({height: "auto",
+            width: 600});
+    });
+
+    $("#ajoutcert").click(function (e) {
+
+   if($("#nomcert").val()!=null && $("#oraganisme").val() !=null && $("#anneed").val()!=null  ){
+        var param = {
+
+            "nomcert": $("#nomcert").val(),
+            "organisme": $("#oraganisme").val(),
+
+            "moisd": $("#moisd option:selected" ).text(),
+            "moisf": $("#moisf option:selected" ).text(),
+            "anneed": $("#anneed").val(),
+            "anneef": $("#anneef").val(),
+            "url": $("#url").val()
+        };
+
+
+
+
+        if ($("#anneed").val().length ==4&& $.isNumeric($("#anneed").val()) ) {
+
+                    //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+                    $.post("{{ path('Ajout_Certif') }}", param, function (data) {
+
+                        if (status = "success") {
+                            alert("Success");
+                        }
+                    });
+
+
+        }
+        else{
+            alert("Année erronée");
+        }
+   } else {
+       alert("Remplir tous les champs");
+   }
+
+    });
+    {% for certif in certification %}
+    $("#check{{ certif.id }}").click(function () {
+        if($(this).is(':checked')){
+            console.log("clicked");
+            $("#moisf{{ certif.id }}").hide();
+            $("#label_Mois_Fin{{ certif.id }}").hide();
+            $("#anneef{{ certif.id }}").hide();
+            $("#label_annee_Fin{{ certif.id }}").hide();
+        }
+        else{
+            $("#moisf{{ certif.id }}").show();
+            $("#label_Mois_Fin{{ certif.id }}").show();
+            $("#anneef{{ certif.id }}").show();
+            $("#label_annee_Fin{{ certif.id }}").show();
+        }
+    });
+    //jquery (bib js)frontend
+    $("#certificat{{ certif.id }}").click(function (e) {
+        $("#dialog3{{ certif.id }}").show().dialog({height: "auto",
+            width: 600});
+        $("#modnomcert{{ certif.id }}").val("{{ certif.nomcertif }}");
+        $("#modoraganisme{{ certif.id }}").val("{{ certif.organisme }}");
+        $("#modmoisd{{ certif.id }}").val("{{ certif.moisdebut }}");
+        $("#modmoisf{{ certif.id }}").val("{{ certif.moisfin }}");
+        $("#modanneed{{ certif.id }}").val("{{ certif.anneedebut }}");
+        $("#modanneef{{ certif.id }}").val("{{ certif.anneefin }}");
+        $("#modurl{{ certif.id }}").val("{{ certif.url }}");
+    });
+
+
+    $("#modcert{{ certif.id }}").click(function (e) {
+
+
+        var param = {
+
+            "nomcert": $("#modnomcert{{ certif.id }}").val(),
+            "organisme": $("#modoraganisme{{ certif.id }}").val(),
+
+            "moisd": $("#modmoisd{{ certif.id }}").val(),
+            "moisf": $("#modmoisf{{ certif.id }}").val(),
+            "anneed": $("#modanneed{{ certif.id }}").val(),
+            "anneef": $("#modanneef{{ certif.id }}").val(),
+            "url": $("#modurl{{ certif.id }}").val()
+        };
+
+
+
+        if ($("#modanneed{{ certif.id }}").val().length ==4&& $.isNumeric($("#modanneed{{ certif.id }}").val()) ) {
+            if ($("#modanneef{{ certif.id }}").val().length ==4 && $.isNumeric($("#modanneef{{ certif.id }}").val()) ) {
+                if($("#modanneef{{ certif.id }}").val() > $("#modanneed{{ certif.id }}").val() ) {
+                    //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+                    $.post("{{ path('Modifier_certif',{'id':certif.id}) }} ", param, function (data) {
+
+                        if (status = "success") {
+                            alert("Success");
+                        }
+                    });
+                }
+                else{
+                    alert("Année erronée");
+                }
+            }
+            else{
+                alert("Année erronée");
+            }
+        }
+        else{
+            -  alert("Année erronée");
+        }
+    });
+    {% endfor %}
+
+    $("#ajoutcom").click(function (e) {
+        $("#dialog6").show().dialog({height: "auto",
+            width: 500});
+    });
+    $("#ajoutcompp").click(function (e) {
+      if($("#nomcomp").val()!=null ){
+
+        var param = {
+
+            "nomcomp": $("#nomcomp").val(),
+
+        };
+
+                //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+                $.post("{{ path('Ajout_Competence') }}", param, function (data) {
+
+                    if (status = "success") {
+                        alert("Success");
+                    }
+                });
+        }
+      else{
+          alert("Remplir tous les champs");
+      }
+
+
+    });
+    {% for comp in competence %}
+
+    //jquery (bib js)frontend
+    $("#competence{{ comp.id }}").click(function (e) {
+        $("#dialog4{{ comp.id }}").show().dialog({height: "auto",
+            width: 600});
+        $("#modnomcomp{{ comp.id }}").val("{{ comp.nomcompetence}}");
+
+    });
+
+
+    $("#modcompp{{ comp.id }}").click(function (e) {
+
+
+        var param = {
+
+            "nomcomp": $("#modnomcomp{{ comp.id }}").val()
+          };
+
+
+
+                    //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+        $.post("{{ path('Modifier_comp',{'id':comp.id}) }} ", param, function (data) {
+
+            if (status = "success") {
+                alert("Success");
+            }
+        });
+
+    });
+    {% endfor %}
+
+    $("#ajoutlangue").click(function (e) {
+        $("#dialog8").show().dialog({height: "auto",
+            width: 500});
+    });
+    $("#ajoutlang").click(function (e) {
+    if($("#langue").val()!=null && $("#niveau").val()!=null){
+
+        var param = {
+
+            "langue": $("#langue").val(),
+            "niveau": $("#niveau").val(),
+        };
+
+        //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+        $.post("{{ path('Ajout_Langue') }}", param, function (data) {
+
+            if (status = "success") {
+                alert("Success");
+            }
+        });
+    }else {
+        alert("Remplir tous les champs");
+    }
+
+    });
+    {% for lang in langue %}
+
+    //jquery (bib js)frontend
+    $("#languee{{ lang.id }}").click(function (e) {
+        $("#dialog8{{ lang.id }}").show().dialog({height: "auto",
+            width: 600});
+        $("#modlangue{{lang.id }}").val("{{ lang.langue}}");
+        $("#modniveau{{ lang.id }}").val("{{ lang.niveau}}");
+
+
+    });
+
+
+    $("#modlang{{ lang.id }}").click(function (e) {
+
+
+        var param = {
+
+
+            "langue": $("#modlangue{{ lang.id }}").val(),
+            "niveau": $("#modniveau{{ lang.id }}").val(),
+
+
+        };
+
+
+
+        //ajax(methode pour envoyer des requette à server(communiquer avec le backend(symfony)
+        $.post("{{ path('Modifier_Langue',{'id':lang.id}) }} ", param, function (data) {
+
+            if (status = "success") {
+                alert("Success");
+            }
+        });
+
+    });
+    {% endfor %}
+
+</script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends('base.html.twig') %}
+{% block section %}
+
+<div class="col-lg-9 col-md-12 col-sm-12 col-pad">
+    <div class="content-area5 dashboard-content">
+        <div class="submit-address dashboard-list">
+            <form method="GET">
+                <h4>Messages</h4>
+                <div class="row pad-20">
+                    <div class="col-lg-12">
+                       {% for contact in message %}
+                        {% for r in app.user.Roles %}
+                        {% if  r =="ROLE_ENTREPRISE" and contact.iduserrecepteur == app.user %}
+
+                            <div class="comment">
+                            <div class="comment-author">
+                                <a href="#">
+                                    <img src="{{ contact.iduserenvoyer.image  }}" alt="comments-user">
+                                </a>
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-meta">
+                                    <h5>
+                                        {{ contact.iduserenvoyer.prenom }} {{ contact.iduserenvoyer.nom }}
+                                    </h5>
+                                    <h7>
+                                        {{ contact.iduserenvoyer.email }}
+                                    </h7>
+                                </div>
+                                <p>{{ contact.message }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if  r =="ROLE_FREELANCER" and contact.iduserrecepteur == app.user %}
+                        <div class="comment">
+                            <div class="comment-author">
+                                <a href="#">
+                                    <img src="{{ contact.iduserenvoyer.image  }}" alt="comments-user">
+                                </a>
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-meta">
+                                    <h5>
+                                        {{ contact.iduserenvoyer.nom }}
+                                    </h5>
+                                    <h7>
+                                        {{ contact.iduserenvoyer.email }}
+                                    </h7>
+                                </div>
+                                <p>{{ contact.message }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
